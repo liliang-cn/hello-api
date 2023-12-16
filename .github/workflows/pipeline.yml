@@ -13,6 +13,7 @@ jobs:
     name: Test Application
     needs:
       - format-check
+      - lint
     runs-on: ubuntu-latest
     steps:
       - name: Set up Go 1.x
@@ -112,3 +113,12 @@ jobs:
         uses: actions/checkout@v2
       - name: Run Format Check
         run: make check-format
+      - name: Vet
+        run: go vet ./...
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Lint
+        uses: golangci/golangci-lint-action@v2
