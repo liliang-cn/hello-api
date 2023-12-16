@@ -1,10 +1,9 @@
-GO_VERSION := 1.18
+GO_VERSION := 1.21
 
 .PHONY: install-go init-go
 
 setup: install-go init-go
 
-#TODO add macOS support
 install-go:
 	wget "https://golang.org/dl/go$(GO_VERSION).linux-amd64.tar.gz"
 	sudo tar -C /usr/local -xzf go$(GO_VERSION).linux-amd64.tar.gz		
@@ -33,3 +32,6 @@ coverage:
 
 report:
 	go tool cover -html=coverage.out -o cover.html
+
+check-format:
+	test -z $$(go fmt ./...)

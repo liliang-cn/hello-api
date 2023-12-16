@@ -24,4 +24,4 @@
 
 ### Upgrade Go
 
-`sudo make install-go`
+`sudo make upgrade-go`
