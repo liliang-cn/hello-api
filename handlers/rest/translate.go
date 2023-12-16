@@ -28,7 +28,6 @@ func TranslateHandler(w http.ResponseWriter, r *http.Request) {
 	translationRes := translation.Translate(word, language)
 
 	if translationRes == "" {
-		language = ""
 		w.WriteHeader(404)
 		return
 	}
