@@ -15,3 +15,7 @@
 # vendor/
 
 api
+coverage.out
+cover.html
+
+.idea/
