@@ -1,4 +1,4 @@
-GO_VERSION := 1.21
+GO_VERSION := 1.21.5
 
 .PHONY: install-go init-go
 
@@ -12,7 +12,7 @@ install-go:
 init-go:
 	@echo 'export PATH=$$PATH:/usr/local/go/bin' >> $${HOME}/.bashrc
 	@echo 'export PATH=$$PATH:$$HOME/go/bin' >> $${HOME}/.bashrc
-	@. $${HOME}/.bashrc
+	@source $${HOME}/.bashrc
 
 upgrade-go:
 	sudo rm -rf /usr/bin/go
