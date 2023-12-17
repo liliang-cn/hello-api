@@ -1,6 +1,23 @@
 linters:
   enable:
     - gosec
+    - godot
+    - misspell
+    - stycheck
+lintrers-settings:
+  stylecheck:
+    go: "1.20"
+    checks: ["all", "ST1*"]
+issues:
+  exclude-use-default: false
+
+linters-overrides:
+  - package: github.com/golangci/golangci-lint/pkg/analyzer/passes/staticcheck
+    checkName: SA1019 # disable SA1019, it's too aggressive
+
+linters-settings:
+  gosec:
+    min_confidence: 0.8
 
 output:
   format: colored-line-number
