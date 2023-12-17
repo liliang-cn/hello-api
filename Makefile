@@ -2,7 +2,7 @@ GO_VERSION := 1.21.5
 
 .PHONY: install-go init-go
 
-setup: install-go init-go install-lint
+setup: install-go init-go install-lint copy-hooks
 
 install-go:
 	wget "https://golang.org/dl/go$(GO_VERSION).linux-amd64.tar.gz"
@@ -38,8 +38,12 @@ check-format:
 
 install-lint:
 	curl -sSfL \
-  		https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh \
- 		| sh -s -- -b $$(go env GOPATH)/bin v1.55.2
+		https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh \
+		| sh -s -- -b $$(go env GOPATH)/bin v1.55.2
 
 static-check:
 	golangci-lint run
+
+copy-hooks:
+	chmod +x scripts/hooks/*
+	cp -r scripts/hooks .git/.
