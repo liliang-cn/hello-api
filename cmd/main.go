@@ -6,13 +6,17 @@ import (
 
 	"github.com/liliang-cn/hello-api/handlers"
 	"github.com/liliang-cn/hello-api/handlers/rest"
+	"github.com/liliang-cn/hello-api/translation"
 )
 
 func main() {
-	addr := ":8080"
+	addr := ":8081"
 	mux := http.NewServeMux()
 
-	mux.HandleFunc("/hello", rest.TranslateHandler)
+	translationService := translation.NewStaticService()
+	translateHandler := rest.NewTranslatorHandler(translationService)
+
+	mux.HandleFunc("/hello", translateHandler.TranslateHandler)
 	mux.HandleFunc("/health", handlers.HealthCheck)
 
 	log.Printf("listening on %s\n", addr)

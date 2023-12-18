@@ -7,6 +7,7 @@ import (
 	"testing"
 
 	"github.com/liliang-cn/hello-api/handlers/rest"
+	"github.com/liliang-cn/hello-api/translation"
 )
 
 func TestTranslateAPI(t *testing.T) {
@@ -36,7 +37,9 @@ func TestTranslateAPI(t *testing.T) {
 		},
 	}
 
-	handler := http.HandlerFunc(rest.TranslateHandler)
+	underTest := rest.NewTranslatorHandler(translation.NewStaticService())
+
+	handler := http.HandlerFunc(underTest.TranslateHandler)
 
 	for _, test := range tt {
 		rr := httptest.NewRecorder()
